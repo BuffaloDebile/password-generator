@@ -145,6 +145,31 @@ body {
   width: 50%;
 }
 
+.copy-btn::before {
+  content: 'copied ✅';
+  font-size: 16px;
+  padding: 6px;
+  white-space: nowrap;
+  display: block;
+  position: absolute;
+  top: -90%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  background: #fff;
+  display: none;
+}
+.copy-btn.active::before {
+  display: block;
+  animation: toast 0.6s ease-out;
+}
+
+@keyframes toast {
+  to {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
 .range-group {
   margin-top: 30px;
 }

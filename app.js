@@ -95,6 +95,16 @@ const copyBtn = document.querySelector('.copy-btn');
 
 copyBtn.addEventListener('click', copyPassword);
 
+let lockedTooltip = false;
+
 function copyPassword(e) {
   navigator.clipboard.writeText(passwordContent.textContent);
+  if (!lockedTooltip) {
+    lockedTooltip = true;
+    copyBtn.classList.add('active');
+    setTimeout(() => {
+      copyBtn.classList.remove('active');
+      lockedTooltip = false;
+    }, 800);
+  }
 }
