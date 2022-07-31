@@ -23,11 +23,16 @@ const charactersSet = {
     addASet(33, 47) + addASet(58, 64) + addASet(91, 96) + addASet(123, 126),
 };
 
+const range = document.querySelector("input[type='range'");
+const rangeLabel = document.querySelector('.range-group label');
+
+rangeLabel.textContent = `password length: ${range.value}`;
+let passwordLength = range.value;
+
 const passwordContent = document.querySelector('.password-content');
 const errorMsg = document.querySelector('.error-msg');
 const generateBtn = document.querySelector('.generate-password-btn');
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
-let passwordLength = 10;
 
 generateBtn.addEventListener('click', createPassword);
 
@@ -35,7 +40,7 @@ function createPassword() {
   const checkedDataSets = checkedSets();
 
   if (!checkedDataSets.length) {
-    errorMsg.textContent = 'Au moins une case doit être cochée !';
+    errorMsg.textContent = 'Dude! Select at least one box';
     return;
   } else errorMsg.textContent = '';
 
@@ -77,4 +82,19 @@ function checkedSets() {
   );
 
   return checkedSets;
+}
+
+range.addEventListener('input', handleRange);
+
+function handleRange(e) {
+  passwordLength = e.target.value;
+  rangeLabel.textContent = `password length: ${passwordLength}`;
+}
+
+const copyBtn = document.querySelector('.copy-btn');
+
+copyBtn.addEventListener('click', copyPassword);
+
+function copyPassword(e) {
+  navigator.clipboard.writeText(passwordContent.textContent);
 }
